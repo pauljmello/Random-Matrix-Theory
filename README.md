@@ -6,7 +6,7 @@ This implementation reveals both Wigner's semicircle law for global eigenvalue d
 
 ## Overview
 
-TWe utilize the three classical ensembles, each representing different quantum mechanical symmetries found in nature, namely Gaussian Orthogonal, Gaussian Unitary. and Gaussian Symplectic.
+We utilize the three classical ensembles, each representing different quantum mechanical symmetries found in nature, namely Gaussian Orthogonal, Gaussian Unitary. and Gaussian Symplectic.
 GOE (Gaussian Orthogonal Ensemble) describes systems with time-reversal symmetry, such as quantum systems with spinless particles or systems where the Hamiltonian commutes with the time-reversal operator T (where T² = +1).
 GUE (Gaussian Unitary Ensemble) represents systems without time-reversal symmetry, such as those found in systems with magnetic fields or complex quantum systems.
 GSE (Gaussian Symplectic Ensemble) captures systems with time-reversal symmetry but with additional constraints, specifically systems with half-integer spin where T² = -1, leading to Kramers degeneracy.
