@@ -4,7 +4,7 @@ from utils import ensure_images_directory, run_ensemble_analysis, run_spectral_e
 def config():
     return {
         'matrix_size': 32,
-        'num_samples': 10000,
+        'num_samples': 50000,
         'batch_size': 512,
         'ensembles': ['GOE', 'GUE', 'GSE'],
         'spectral_matrix_sizes': [1, 2, 4, 8, 16, 32],

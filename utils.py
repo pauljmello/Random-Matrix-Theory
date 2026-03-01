@@ -84,7 +84,7 @@ def visualize_spectral_density_evolution(cfg):
     rows = (len(sizes) + columns - 1) // columns
 
     figure, axes = plt.subplots(rows, columns, figsize=(15, 5 * rows))
-    axes = axes.reshape(rows, columns)
+    axes = np.atleast_2d(axes).reshape(rows, columns)
     figure.suptitle('Spectral Density Across Symmetric Matrix Sizes', fontsize=18, fontweight='bold')
 
     for ensemble in ensembles:
@@ -95,7 +95,9 @@ def visualize_spectral_density_evolution(cfg):
             r, c = divmod(index, columns)
             ax = axes[r, c]
             eigenvalues = data[matrix_size]
-            histogram, edges = np.histogram(eigenvalues, bins=bins, density=True, range=(-3, 3))
+            eig_min, eig_max = eigenvalues.min(), eigenvalues.max()
+            hist_range = (min(-3, eig_min), max(3, eig_max))
+            histogram, edges = np.histogram(eigenvalues, bins=bins, density=True, range=hist_range)
             centres = 0.5 * (edges[:-1] + edges[1:])
             ax.plot(centres, histogram, color=props['color'], lw=2, alpha=0.8, label=ensemble)
             ax.fill_between(centres, 0, histogram, color=props['color'], alpha=0.25)

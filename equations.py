@@ -23,12 +23,13 @@ def create_goe_matrix(size):
 
 
 def create_gue_matrix(size):
-    sigma = 1 / np.sqrt(size)
+    sigma_off = 1 / np.sqrt(size)
+    sigma_diag = np.sqrt(2) * sigma_off
     matrix = np.zeros((size, size), dtype=np.complex128)
     upper = np.triu_indices(size, k=1)
-    matrix[upper] = sample_gaussian_complex(sigma, len(upper[0]))
+    matrix[upper] = sample_gaussian_complex(sigma_off, len(upper[0]))
     matrix += np.conj(matrix.T)
-    np.fill_diagonal(matrix, sample_gaussian_real(sigma, size))
+    np.fill_diagonal(matrix, sample_gaussian_real(sigma_diag, size))
     return matrix
 
 
@@ -46,7 +47,7 @@ def create_gse_matrix(size):
     # B: complex anti-Hermitian (B† = -B), diagonal zero
     B = np.zeros((size, size), dtype=np.complex128)
     B[upper] = sample_gaussian_complex(sigma_off, len(upper[0]))
-    B = B - np.conj(B.T)
+    B = B - B.T
     np.fill_diagonal(B, 0.0 + 0.0j)
 
     upper_block = np.hstack((A, B))
@@ -88,6 +89,7 @@ def semicircular_cumulative(x):
 
 
 def unfold_eigenvalues(eigenvalues):
+    eigenvalues = np.sort(eigenvalues)
     size = len(eigenvalues)
     return size * semicircular_cumulative(eigenvalues)
 
